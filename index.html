@@ -1,18 +1,144 @@
 <html>
 	<head>
+		<title>Oliver Gmail</title>
 		<script src="js/mail-generator.js"></script>
 		<link href="css/style.css" rel="stylesheet" media="screen">
-    <script>
-      window.onload = function(){
-        // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
-        // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
+<!--bootstrap install from - http://getbootstrap.com/getting-started/-->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<!--Jquery UI-->
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<!--fonts-->
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid Sans">
+
+
+<script>
+window.onload = function(){
+      // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
+      // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
+
+        var counter = 0;
+        var existingEmails = window.geemails.length;
+
+        for (i = 0; i < existingEmails; i++) {
+
+            var newMessage = window.geemails[i];
+            appendMessage(newMessage);
+
+        };
+
+
         
-      };
+ 
+        //This function appends the date, subject and sender onto a new email row, below the previous one
+        function appendMessage () {
+                
+                var newMessage = getNewMessage();
+
+                var date = newMessage.date;
+                var sender = newMessage.sender;
+                var subject = newMessage.subject;
+                var body = newMessage.body;
+
+                
+                counter = counter + 1
+                
+                //Appends to the previously received email.
+                $('.email-container').append(
+                    
+                    '<div> &nbsp </div>' + 
+                
+                    '<div class="email-row row-highlight">' +
+                
+                    '<div class="col-md-4 generated-row">' + '<a id="' + (-1 * counter) +'" href="#">'  + date + '</a>' + '</div>' +
+                    '<div class="col-md-4 generated-row">'  + '<a id="' + (-1 * counter) +'" href="#">' + subject + '</a>' + '</div>' +
+                    '<div class="col-md-4 generated-row">'  + '<a id="' + (-1 * counter) +'" href="#">' + sender + '</a>' + '</div>' +  
+
+                    '</div>' +
+
+                    '<div class="email-row">' +
+                        
+                        '<div class="col-md-12 body-text" id="' + counter + '">'  + body + '</div>' + 
+
+                    '</div>' +
+
+                    '<div> &nbsp </div>'
+                
+                )
+
+                //Starts off at 10 due to existing mails generated in mail-generator.js. So need to subtract 9 to make 1 when new emails come in.                
+                document.getElementById("inbox-counter").innerHTML = counter;
+                
+                
+                $('#' + counter).hide();
+
+                $('a').click(function(event){
+                    $('#' + event.target.id * - 1).toggle();
+                });
+
+                
+                
+        }   
+
+        setInterval(appendMessage,1000);
+
+       
+    }   
+
     </script>
 	</head>
 	<body>
-		<div class="container" id="main">
-			Build Me!
-		</div>
+
+<header>
+	 <nav class="super"> 
+	 <a href="https://www.google.com.au/webhp?hl=en">Search</a>
+	 <a href="https://www.google.com.au/search?q=google&hl=en&biw=1257&bih=514&site=webhp&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjuvpmKk9jJAhVJjJQKHdbSAMEQ_AUIBigB">Images</a>
+	 <a href="https://www.google.com.au/maps?q=google&hl=en&biw=1257&bih=514&um=1&ie=UTF-8&sa=X&ved=0ahUKEwiSq5KLk9jJAhWJlJQKHR2PASoQ_AUICCgC">Maps</a>
+
+	 </nav>
+    		<div class="search">
+       		<img src="https://ssl.gstatic.com/ui/v1/icons/mail/logo_default.png" id="logo" />
+       
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+         <h1>Oliver copy Gmail</h1>
+    </div>
+
+</header>
+
+<div id="side">
+   
+    <p>The Internet is the global system of interconnected computer networks that use the Internet protocol suite (TCP/IP) to link billions of devices worldwide. It is a network of networks that consists of millions of private, public, academic, business, and government networks of local to global scope, linked by a broad array of electronic, wireless, and optical networking technologies. The Internet carries an extensive range of information resources and services, such as the inter-linked hypertext documents and applications of the World Wide Web (WWW), electronic mail, telephony, and peer-to-peer networks for file sharing.
+</p>
+   
+</div>
+
+
+
+<div id="content">
+	<div class="email-counter">
+        <div class="row">
+            <div class="col-xs-2 text-center"><h2>INBOX:</h2></div>
+		    <div class="col-xs-1"><h2 id="inbox-counter"></h2></div>
+            <p id="instructional">To check out your emails please click on the date, subject or sender</p>
+        </div>
+	</div>
+
+    <div class="email-container">
+        <div class = "col-md-4 generated-row"><h4>Date</h4></div>
+
+        <div class = "col-md-4 generated-row"><h4>Subject</h4></div>
+
+        <div class = "col-md-4 generated-row"><h4>Sender</h4></div>
+    </div>
+</div>
+<footer>Footer</footer>
+
+
 	</body>
 </html>
